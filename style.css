@@ -1,0 +1,940 @@
+/*
+ * Kauai Design System — Modern CSS (2026)
+ * Pure Vanilla CSS · No Frameworks
+ * Features: CSS Nesting · oklch() · color-mix() · Scroll-Driven Animations
+ *           Container Queries · :has() · @starting-style · text-wrap
+ */
+
+/* ==========================================================================
+   Google Fonts
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Lato:wght@300;400;700&display=swap');
+
+/* ==========================================================================
+   Design Tokens (CSS Custom Properties)
+   ========================================================================== */
+:root {
+  /* Primary Palette — oklch for perceptual uniformity */
+  --c-primary: oklch(0.65 0.18 145);
+  --c-primary-light: color-mix(in oklch, var(--c-primary) 72%, white);
+  --c-primary-dark: oklch(0.42 0.14 145);
+  --c-primary-glow: color-mix(in oklch, var(--c-primary) 30%, transparent);
+
+  /* Secondary & Accent */
+  --c-secondary: #FAFAFA;
+  --c-accent: oklch(0.55 0.19 42);
+  --c-accent-light: color-mix(in oklch, var(--c-accent) 18%, white);
+
+  /* Backgrounds */
+  --c-bg: #FAFAFA;
+  --c-bg-alt: #FFFFFF;
+  --c-bg-card: #FFFFFF;
+  --c-bg-stone: #F5F0E8;
+
+  /* Text */
+  --c-text-main: #1B1B1B;
+  --c-text-muted: #5C5C5C;
+  --c-text-light: #F4F4F4;
+
+  /* Borders & Feedback */
+  --c-border: #E0E0E0;
+  --c-border-focus: var(--c-primary);
+  --c-success: oklch(0.62 0.17 160);
+  --c-error: oklch(0.58 0.22 27);
+
+  /* Typography */
+  --f-display: 'Poppins', system-ui, -apple-system, sans-serif;
+  --f-body: 'Lato', system-ui, -apple-system, sans-serif;
+
+  /* Spacing (4px base) */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.25rem;
+  --s-6: 1.5rem;
+  --s-8: 2rem;
+  --s-10: 2.5rem;
+  --s-12: 3rem;
+  --s-16: 4rem;
+  --s-20: 5rem;
+  --s-24: 6rem;
+
+  /* UI Tokens */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 1px 3px oklch(0 0 0 / 0.06);
+  --shadow-md: 0 4px 12px oklch(0 0 0 / 0.08), 0 2px 4px oklch(0 0 0 / 0.04);
+  --shadow-lg: 0 12px 28px oklch(0 0 0 / 0.10), 0 4px 10px oklch(0 0 0 / 0.05);
+  --shadow-glow: 0 4px 18px var(--c-primary-glow);
+
+  --transition-fast: 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-default: 400ms cubic-bezier(0.25, 1, 0.5, 1);
+  --transition-spring: 550ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-premium: 800ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  --z-sticky: 100;
+  --z-modal: 200;
+  --max-w: 1152px;
+}
+
+/* Premium Selection & Custom Scrollbar */
+::selection {
+  background-color: var(--c-accent);
+  color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--c-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: color-mix(in oklch, var(--c-primary) 30%, transparent);
+  border-radius: var(--radius-full);
+  border: 3px solid var(--c-bg);
+  transition: background var(--transition-fast);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--c-primary);
+}
+
+
+/* ==========================================================================
+   Modern CSS Reset
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  hanging-punctuation: first last;
+}
+
+body {
+  font-family: var(--f-body);
+  color: var(--c-text-main);
+  background-color: var(--c-bg);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+}
+
+img, picture, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color var(--transition-fast);
+}
+
+ul, ol {
+  list-style: none;
+  padding-left: 0;
+}
+
+button, input, textarea, select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+/* ==========================================================================
+   Typography — Poppins headings, Lato body
+   ========================================================================== */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--f-display);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: var(--s-4);
+  color: var(--c-primary-dark);
+  text-wrap: balance;
+}
+
+h1, h2 {
+  background: linear-gradient(135deg, var(--c-primary-dark) 40%, var(--c-primary) 75%, var(--c-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  letter-spacing: -0.025em;
+  font-weight: 800;
+}
+
+h2 {
+  font-size: clamp(1.875rem, 4vw, 3rem);
+  letter-spacing: -0.015em;
+}
+
+
+h3 {
+  font-size: clamp(1.375rem, 3vw, 1.875rem);
+}
+
+h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: var(--s-2);
+}
+
+p {
+  margin-bottom: var(--s-4);
+  margin-inline: auto;
+  text-wrap: pretty;
+  max-width: 72ch;
+}
+
+strong {
+  font-weight: 700;
+  color: var(--c-primary-dark);
+}
+
+hr {
+  border: 0;
+  border-top: 2px solid var(--c-border);
+  margin: var(--s-8) 0;
+  background: linear-gradient(90deg, var(--c-primary), var(--c-accent), var(--c-primary));
+  background-size: 100% 2px;
+  background-repeat: no-repeat;
+}
+
+/* ==========================================================================
+   Header & Navigation
+   ========================================================================== */
+body > header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 0.875rem clamp(1rem, 4vw, 3rem);
+  background: oklch(0.98 0 0 / 0.88);
+  backdrop-filter: blur(16px) saturate(1.8);
+  -webkit-backdrop-filter: blur(16px) saturate(1.8);
+  border-bottom: 1px solid oklch(0 0 0 / 0.04);
+  /* Scroll-driven progressive shadow */
+  animation: header-scroll-shadow linear both;
+  animation-timeline: scroll();
+  animation-range: 0px 120px;
+}
+
+@keyframes header-scroll-shadow {
+  from {
+    box-shadow: 0 0 0 oklch(0 0 0 / 0);
+    border-bottom-color: oklch(0 0 0 / 0.04);
+  }
+  to {
+    box-shadow: 0 4px 24px oklch(0 0 0 / 0.08);
+    border-bottom-color: oklch(0 0 0 / 0.06);
+  }
+}
+
+/* Brand logo link */
+body > header > a {
+  display: flex;
+  align-items: center;
+  color: var(--c-primary-dark);
+  transition: transform var(--transition-fast);
+}
+
+body > header > a:hover {
+  transform: scale(1.03);
+}
+
+body > header h1 {
+  font-size: 1.75rem;
+  margin: 0;
+  color: var(--c-primary-dark);
+  letter-spacing: -0.01em;
+  background: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: currentColor;
+  background-clip: unset;
+}
+
+
+/* Navigation links */
+body > header nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  font-weight: 600;
+  font-family: var(--f-display);
+  font-size: 0.9375rem;
+  color: var(--c-text-muted);
+}
+
+/* Support for table-based nav in inquiry.html */
+body > header nav table {
+  width: auto;
+  border-collapse: collapse;
+}
+
+body > header nav td {
+  padding: 0.2rem 0.35rem !important;
+}
+
+body > header nav a {
+  color: var(--c-text-main);
+  padding: 0.5rem 0.8rem;
+  border-radius: var(--radius-md);
+  position: relative;
+  transition: color var(--transition-fast), background-color var(--transition-default), transform var(--transition-fast);
+}
+
+/* Modern underline animation on hover */
+body > header nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0.15rem;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--c-primary), var(--c-accent));
+  border-radius: var(--radius-full);
+  transition: width var(--transition-default), left var(--transition-default);
+}
+
+body > header nav a:hover {
+  color: var(--c-primary-dark);
+  background-color: color-mix(in oklch, var(--c-primary) 7%, transparent);
+}
+
+body > header nav a:hover::after {
+  width: 60%;
+  left: 20%;
+}
+
+
+/* ==========================================================================
+   Main Content Container
+   ========================================================================== */
+main {
+  width: min(100% - 2rem, var(--max-w));
+  margin: 0 auto;
+  padding: var(--s-8) 0;
+}
+
+/* ==========================================================================
+   Sections — Glass Card Style
+   ========================================================================== */
+main section {
+  background: var(--c-bg-card);
+  border: 1px solid oklch(0 0 0 / 0.06);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  margin-bottom: var(--s-8);
+  /* Scroll-driven reveal using premium Apple easing */
+  animation: section-reveal var(--transition-premium) both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 25%;
+}
+
+@keyframes section-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+
+/* ==========================================================================
+   Intro / Hero Sections — Gradient background
+   ========================================================================== */
+#hero,
+#about-intro,
+#contact-intro,
+#enquiry-intro,
+#menu-intro {
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklch, var(--c-primary) 14%, white),
+    color-mix(in oklch, var(--c-accent) 8%, white)
+  );
+  border-color: color-mix(in oklch, var(--c-primary) 22%, transparent);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative gradient orb behind intro sections */
+#hero::before,
+#about-intro::before,
+#contact-intro::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -20%;
+  width: 60%;
+  height: 120%;
+  background: radial-gradient(
+    circle,
+    color-mix(in oklch, var(--c-primary) 10%, transparent) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Intro images */
+#hero img,
+#about-intro img,
+#contact-intro img,
+#enquiry-intro img,
+section > img {
+  border-radius: var(--radius-lg);
+  margin: var(--s-4) auto var(--s-6);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition-default), box-shadow var(--transition-default);
+  position: relative;
+  z-index: 1;
+}
+
+#hero img:hover,
+#about-intro img:hover,
+section > img:hover {
+  transform: scale(1.015);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Intro section text stays above decorative bg */
+#hero > *,
+#about-intro > *,
+#contact-intro > *,
+#enquiry-intro > *,
+#menu-intro > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   Links within main content
+   ========================================================================== */
+main a {
+  color: var(--c-primary-dark);
+  font-weight: 700;
+  position: relative;
+  transition: color var(--transition-fast);
+}
+
+main a:hover {
+  color: var(--c-accent);
+}
+
+/* ==========================================================================
+   Buttons & CTAs
+   ========================================================================== */
+#hero > a,
+#menu-anchors a,
+input[type="submit"],
+input[type="reset"],
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: var(--radius-full);
+  padding: 0.8rem 1.6rem;
+  margin: 0.25rem;
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-dark));
+  color: #fff;
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  letter-spacing: 0.01em;
+  box-shadow: var(--shadow-glow);
+  transition: transform var(--transition-fast),
+              box-shadow var(--transition-fast),
+              background var(--transition-fast);
+  cursor: pointer;
+}
+
+#hero > a:hover,
+#menu-anchors a:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+button:hover {
+  background: linear-gradient(135deg, var(--c-accent), oklch(0.50 0.20 42));
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px color-mix(in oklch, var(--c-accent) 30%, transparent);
+}
+
+#hero > a:active,
+button:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Menu anchor pills */
+#menu-anchors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  justify-content: center;
+  margin-top: var(--s-4);
+}
+
+#menu-anchors a {
+  font-size: 0.875rem;
+  padding: 0.55rem 1.2rem;
+  background: var(--c-bg-card);
+  color: var(--c-text-main);
+  border: 1.5px solid var(--c-border);
+  box-shadow: var(--shadow-sm);
+}
+
+#menu-anchors a:hover {
+  background: var(--c-primary);
+  color: #fff;
+  border-color: var(--c-primary);
+}
+
+/* ==========================================================================
+   List Items — Card Style
+   ========================================================================== */
+main li {
+  background: #fff;
+  border-left: 4px solid var(--c-primary);
+  border-radius: var(--radius-md);
+  padding: var(--s-5);
+  margin-bottom: var(--s-4);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-spring),
+              box-shadow var(--transition-spring),
+              border-color var(--transition-fast);
+  /* Staggered reveal on scroll using premium easing */
+  animation: item-reveal var(--transition-default) both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 20%;
+}
+
+@keyframes item-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+main li:hover {
+  transform: translateY(-5px) scale(1.012);
+  box-shadow: var(--shadow-lg);
+  border-left-color: var(--c-accent);
+}
+
+
+main li h4 {
+  color: var(--c-primary-dark);
+  font-family: var(--f-display);
+}
+
+main li p {
+  margin-bottom: var(--s-2);
+  color: var(--c-text-muted);
+}
+
+main li p:last-child {
+  margin-bottom: 0;
+}
+
+/* Price styling */
+main li strong {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--c-accent), oklch(0.60 0.20 42));
+  color: #fff;
+  padding: 0.2rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: 0.9375rem;
+  font-family: var(--f-display);
+  letter-spacing: 0.02em;
+}
+
+/* List items inside intro/hero sections get no card style */
+main li img {
+  border-radius: var(--radius-md);
+  margin-bottom: var(--s-3);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ==========================================================================
+   Forms — Modern styling over table layouts
+   ========================================================================== */
+form {
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+fieldset {
+  background: #fff;
+  border: 1.5px solid oklch(0 0 0 / 0.08);
+  border-radius: var(--radius-lg);
+  padding: var(--s-6);
+  margin-bottom: var(--s-6);
+  transition: border-color var(--transition-default), box-shadow var(--transition-default);
+}
+
+/* Glow on focus-within using :has() */
+fieldset:focus-within {
+  border-color: var(--c-primary);
+  box-shadow: 0 0 0 4px var(--c-primary-glow);
+}
+
+legend {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--c-primary-dark);
+  padding: 0 var(--s-2);
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: var(--s-2);
+  color: var(--c-text-main);
+  font-size: 0.9375rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+select,
+textarea {
+  width: 100%;
+  padding: var(--s-3) var(--s-4);
+  border: 1.5px solid var(--c-border);
+  border-radius: var(--radius-md);
+  background-color: oklch(0.99 0 0);
+  font-size: 1rem;
+  transition: border-color var(--transition-fast),
+              box-shadow var(--transition-fast),
+              background-color var(--transition-fast);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--c-border-focus);
+  box-shadow: 0 0 0 3px var(--c-primary-glow);
+  background-color: #fff;
+}
+
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%232E7D32'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1.2em;
+  cursor: pointer;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Form table layout compatibility */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td {
+  vertical-align: top;
+  padding: var(--s-2);
+}
+
+iframe {
+  max-width: 100%;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Contact form div spacing */
+#general-contact-form div {
+  margin-bottom: var(--s-4);
+}
+
+/* ==========================================================================
+   Footer — Rich dark green gradient
+   ========================================================================== */
+footer {
+  background: linear-gradient(
+    160deg,
+    oklch(0.28 0.1 145),
+    oklch(0.20 0.08 148)
+  );
+  color: var(--c-text-light);
+  text-align: center;
+  padding: var(--s-12) var(--s-6) var(--s-8);
+  margin-top: var(--s-16);
+  border-top: 3px solid var(--c-accent);
+  position: relative;
+}
+
+/* Subtle grain texture overlay on footer */
+footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+footer > * {
+  position: relative;
+  z-index: 1;
+}
+
+footer h2 {
+  color: #fff;
+  margin-bottom: var(--s-3);
+  font-size: 1.75rem;
+}
+
+footer h4 {
+  color: color-mix(in oklch, white 85%, var(--c-primary-light));
+  margin-top: var(--s-6);
+  margin-bottom: var(--s-3);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+footer p {
+  color: oklch(0.9 0 0 / 0.75);
+  max-width: none;
+  margin-bottom: var(--s-2);
+}
+
+footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: center;
+  font-weight: 600;
+  font-family: var(--f-display);
+  font-size: 0.9375rem;
+}
+
+/* Footer table nav support */
+footer nav table {
+  width: auto;
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+footer nav td {
+  padding: 0.15rem 0.3rem !important;
+}
+
+footer a {
+  color: oklch(0.88 0.05 145);
+  transition: color var(--transition-fast);
+  padding: 0.2rem 0.3rem;
+}
+
+footer a:hover {
+  color: #fff;
+}
+
+footer hr {
+  border-top: 1px solid oklch(1 0 0 / 0.1);
+  margin: var(--s-8) auto var(--s-4);
+  max-width: 400px;
+  background: none;
+}
+
+/* ==========================================================================
+   Menu Page — Category Titles
+   ========================================================================== */
+h3 {
+  color: var(--c-primary-dark);
+}
+
+/* ==========================================================================
+   Badges
+   ========================================================================== */
+.badge {
+  display: inline-block;
+  padding: var(--s-1) var(--s-3);
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--c-accent), oklch(0.60 0.20 42));
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+
+/* ==========================================================================
+   Scroll-Driven Reading Progress Bar
+   ========================================================================== */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--c-primary), var(--c-accent));
+  z-index: calc(var(--z-sticky) + 10);
+  transform-origin: left;
+  animation: progress-bar linear;
+  animation-timeline: scroll();
+  scale: 0 1;
+}
+
+@keyframes progress-bar {
+  to { scale: 1 1; }
+}
+
+/* ==========================================================================
+   Responsive — Mobile First
+   ========================================================================== */
+@media (max-width: 700px) {
+  body > header {
+    align-items: flex-start;
+    padding: 0.75rem 1rem;
+  }
+
+  body > header nav,
+  body > header nav table,
+  body > header nav tbody,
+  body > header nav tr {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+
+  /* Hide pipe separators on mobile */
+  body > header nav td:nth-child(even) {
+    display: none;
+  }
+
+  main {
+    width: min(100% - 1rem, var(--max-w));
+    padding-top: var(--s-4);
+  }
+
+  main section {
+    padding: var(--s-5);
+    border-radius: var(--radius-lg);
+  }
+
+  #menu-anchors {
+    gap: var(--s-1);
+  }
+
+  #menu-anchors a {
+    font-size: 0.8125rem;
+    padding: 0.4rem 0.9rem;
+  }
+
+  footer {
+    padding: var(--s-8) var(--s-4) var(--s-6);
+  }
+}
+
+/* Larger screens — wider nav spacing */
+@media (min-width: 768px) {
+  body > header nav {
+    gap: 0.25rem;
+  }
+
+  body > header nav a {
+    padding: 0.4rem 0.65rem;
+  }
+
+  main li {
+    padding: var(--s-6);
+  }
+}
+
+@media (min-width: 1024px) {
+  main section {
+    padding: clamp(2rem, 4vw, 3rem);
+  }
+}
+
+/* ==========================================================================
+   Accessibility
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  body::after {
+    display: none;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--c-primary);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* ==========================================================================
+   Print Styles
+   ========================================================================== */
+@media print {
+  body > header,
+  footer,
+  body::after {
+    display: none;
+  }
+
+  main section {
+    box-shadow: none;
+    border: 1px solid #ccc;
+    break-inside: avoid;
+  }
+}
