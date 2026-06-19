@@ -571,41 +571,28 @@ function initContactForm() {
         // EmailJS Integration
         // -------------------------------------------------------------
         const EMAILJS_SERVICE_ID = "service_yl8cjej"; // User's Service ID
-        const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID"; // User will provide this once saved
+        const EMAILJS_TEMPLATE_ID = "template_1deukbe"; // User's Contact Us Template ID
         const EMAILJS_PUBLIC_KEY = "mopgh7FbB89KyWt21"; // User's Public Key
 
         // Check if emailjs is loaded
         if (typeof emailjs !== "undefined") {
-            // Check if user set their template ID
-            const isPlaceholderTemplate = EMAILJS_TEMPLATE_ID === "YOUR_TEMPLATE_ID";
-            
-            if (isPlaceholderTemplate) {
-                console.warn("EmailJS: Using placeholder Template ID. Simulating AJAX submission...");
-                setTimeout(() => {
+            // Initialize with Public Key
+            emailjs.init(EMAILJS_PUBLIC_KEY);
+
+            // Send using Form Element directly
+            emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form)
+                .then(() => {
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = originalText;
-                    showFormFeedback(form, "success", `Simulation Success! Replace template ID inside js/main.js to make it live!`);
+                    showFormFeedback(form, "success", "Thank you! Your message has been sent successfully.");
                     form.reset();
-                }, 1200);
-            } else {
-                // Initialize with Public Key
-                emailjs.init(EMAILJS_PUBLIC_KEY);
-
-                // Send using Form Element directly
-                emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form)
-                    .then(() => {
-                        submitBtn.disabled = false;
-                        submitBtn.innerHTML = originalText;
-                        showFormFeedback(form, "success", "Thank you! Your message has been sent successfully.");
-                        form.reset();
-                    })
-                    .catch((err) => {
-                        submitBtn.disabled = false;
-                        submitBtn.innerHTML = originalText;
-                        console.error("EmailJS Error: ", err);
-                        showFormFeedback(form, "error", "Oops! Failed to send email. Check API configurations.");
-                    });
-            }
+                })
+                .catch((err) => {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                    console.error("EmailJS Error: ", err);
+                    showFormFeedback(form, "error", "Oops! Failed to send email. Check API configurations.");
+                });
         } else {
             // Fallback mock send if EmailJS SDK fails to load
             console.error("EmailJS script not loaded. Simulating local mock post...");
