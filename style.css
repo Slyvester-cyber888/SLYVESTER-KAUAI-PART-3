@@ -1198,3 +1198,492 @@ footer hr {
     break-inside: avoid;
   }
 }
+
+/* ==========================================================================
+   Part 3 - Interactive & Dynamic Components Styles
+   ========================================================================== */
+
+/* 1. Leaflet Interactive Map */
+#leaflet-map {
+  width: 100%;
+  height: 450px;
+  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--c-border);
+  box-shadow: var(--shadow-md);
+  margin-top: var(--s-4);
+  z-index: 1; /* Keep map below header nav dropdowns */
+}
+
+.map-popup-card {
+  font-family: var(--f-body);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.leaflet-popup-content-wrapper {
+  background: var(--c-bg-card) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--c-text-main) !important;
+  border: 1.5px solid var(--c-border);
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+
+.leaflet-popup-tip {
+  background: var(--c-bg-card) !important;
+  border-left: 1.5px solid var(--c-border);
+  border-bottom: 1.5px solid var(--c-border);
+}
+
+/* 2. Lightbox Gallery Component */
+.lightbox-modal {
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(18, 30, 22, 0.85);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  z-index: var(--z-modal);
+  justify-content: center;
+  align-items: center;
+  transition: opacity var(--transition-default), visibility var(--transition-default);
+}
+
+.lightbox-modal.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.lightbox-content-wrapper {
+  position: relative;
+  max-width: 85%;
+  max-height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lightbox-image {
+  max-width: 100%;
+  max-height: 70vh;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  transition: opacity 150ms ease-in-out;
+}
+
+.lightbox-caption {
+  margin-top: var(--s-4);
+  color: #fff;
+  font-family: var(--f-display);
+  font-size: 1.125rem;
+  font-weight: 500;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 3rem;
+  font-weight: 300;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.lightbox-close:hover {
+  color: var(--c-accent-light);
+}
+
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 2.5rem;
+  font-weight: bold;
+  padding: var(--s-4);
+  cursor: pointer;
+  user-select: none;
+  transition: color var(--transition-fast);
+}
+
+.lightbox-prev {
+  left: 2rem;
+}
+
+.lightbox-next {
+  right: 2rem;
+}
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+  color: var(--c-primary-light);
+}
+
+@media (max-width: 768px) {
+  .lightbox-prev, .lightbox-next {
+    font-size: 1.75rem;
+    padding: var(--s-2);
+  }
+  .lightbox-prev { left: 0.5rem; }
+  .lightbox-next { right: 0.5rem; }
+}
+
+/* 3. FAQ Accordion Component */
+.accordion-wrapper {
+  margin-top: var(--s-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.accordion-item {
+  border: 1.5px solid var(--c-border);
+  border-radius: var(--radius-md);
+  background: var(--c-bg-card);
+  overflow: hidden;
+  transition: border-color var(--transition-default), box-shadow var(--transition-default);
+}
+
+.accordion-item:hover {
+  border-color: var(--c-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.accordion-header {
+  padding: var(--s-4) var(--s-5);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.accordion-header h4 {
+  font-size: 1.05rem;
+  font-family: var(--f-display);
+  margin: 0;
+  color: var(--c-primary-dark);
+}
+
+.accordion-icon {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--c-primary);
+  transition: transform var(--transition-fast);
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--transition-default) ease-out;
+  padding: 0 var(--s-5);
+}
+
+.accordion-content p {
+  padding-bottom: var(--s-4);
+  color: var(--c-text-muted);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.accordion-item.active {
+  border-color: var(--c-primary);
+}
+
+/* 4. Menu Filter Controls */
+.menu-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-4);
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--s-8);
+}
+
+.menu-search-wrapper {
+  position: relative;
+  flex: 1 1 300px;
+}
+
+.menu-search-input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--c-border);
+  background: var(--c-bg-card);
+  font-size: 0.95rem;
+  transition: border-color var(--transition-fast);
+}
+
+.menu-search-input:focus {
+  outline: none;
+  border-color: var(--c-primary);
+}
+
+.menu-search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--c-text-muted);
+  pointer-events: none;
+}
+
+.menu-filter-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+}
+
+.filter-pill {
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius-full);
+  background: var(--c-bg-card);
+  border: 1.5px solid var(--c-border);
+  font-family: var(--f-display);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.filter-pill:hover,
+.filter-pill.active {
+  background: var(--c-primary);
+  color: #fff;
+  border-color: var(--c-primary);
+  box-shadow: var(--shadow-glow);
+}
+
+.menu-sort-select {
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--c-border);
+  background: var(--c-bg-card);
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+/* 5. Dynamic Menu List Grid */
+.menu-list-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--s-6);
+  list-style: none;
+  padding: 0;
+  animation: section-reveal var(--transition-default) both;
+}
+
+.menu-item-card {
+  background: var(--c-bg-card);
+  border: 1.5px solid var(--c-border);
+  border-radius: var(--radius-md);
+  padding: var(--s-5);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-default), border-color var(--transition-default), box-shadow var(--transition-default);
+}
+
+.menu-item-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--c-primary);
+  box-shadow: var(--shadow-md);
+}
+
+.menu-item-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--s-2);
+}
+
+.menu-item-title-row h4 {
+  font-size: 1.125rem;
+  color: var(--c-primary-dark);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.menu-item-price {
+  font-family: var(--f-display);
+  font-weight: 700;
+  color: var(--c-accent);
+  font-size: 1.125rem;
+}
+
+.menu-item-desc {
+  font-size: 0.9rem;
+  color: var(--c-text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.no-results-message {
+  text-align: center;
+  padding: var(--s-12);
+  background: var(--c-bg-card);
+  border-radius: var(--radius-lg);
+  border: 1.5px dashed var(--c-border);
+  color: var(--c-text-muted);
+}
+
+.badge {
+  display: inline-block;
+  font-size: 0.6875rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-sm);
+  color: #fff;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.badge-primary { background: var(--c-primary); }
+.badge-accent { background: var(--c-accent); }
+
+/* 6. Form Feedback Alert */
+.form-feedback-alert {
+  padding: 1rem var(--s-5);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--s-4);
+  font-size: 0.9375rem;
+  font-family: var(--f-display);
+  animation: section-lift 300ms ease-out both;
+}
+
+.feedback-success {
+  background-color: oklch(0.92 0.04 142);
+  color: oklch(0.35 0.1 142);
+  border: 1px solid oklch(0.8 0.08 142);
+}
+
+.feedback-error {
+  background-color: oklch(0.92 0.04 20);
+  color: oklch(0.35 0.1 20);
+  border: 1px solid oklch(0.8 0.08 20);
+}
+
+@keyframes form-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+.shake-animation {
+  animation: form-shake 300ms ease-in-out;
+}
+
+/* Spinner Element */
+.spinner {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+  vertical-align: middle;
+  margin-left: 0.5rem;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* 7. Response Modal (inquiry.html) */
+.response-modal {
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: var(--z-modal);
+  justify-content: center;
+  align-items: center;
+  transition: opacity var(--transition-default), visibility var(--transition-default);
+}
+
+.response-modal.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal-card {
+  background: var(--c-bg);
+  border: 1.5px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  max-width: 500px;
+  width: 90%;
+  padding: var(--s-6);
+  position: relative;
+  animation: modal-zoom 400ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes modal-zoom {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  font-size: 1.75rem;
+  cursor: pointer;
+  color: var(--c-text-muted);
+  transition: color var(--transition-fast);
+}
+
+.modal-close:hover {
+  color: var(--c-accent);
+}
+
+.modal-header h3 {
+  font-size: 1.35rem;
+  margin-bottom: var(--s-4);
+  color: var(--c-primary-dark);
+}
+
+.modal-body {
+  font-size: 0.95rem;
+  color: var(--c-text-main);
+  line-height: 1.6;
+}
+
+.modal-body ul {
+  padding-left: var(--s-5);
+  margin-block: var(--s-3);
+}
+
+.modal-body li {
+  margin-bottom: 0.25rem;
+}
+
+.modal-footer {
+  margin-top: var(--s-5);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal-btn-close {
+  padding: 0.5rem 1.25rem;
+  font-size: 0.875rem;
+}

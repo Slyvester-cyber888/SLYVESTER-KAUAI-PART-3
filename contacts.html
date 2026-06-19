@@ -3,7 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Contact Kauai to find out more or reach our head office.">
+    <meta name="description" content="Contact Kauai South Africa. Find head office details, call client services, or find store locations nationwide.">
+    <meta name="keywords" content="Kauai contact, customer service email, phone number, Cape Town store, Rosebank store, Gqeberha store, Leaflet map">
+    
+    <!-- Open Graph SEO Meta Tags -->
+    <meta property="og:title" content="Contact Us | Kauai - Store Locator">
+    <meta property="og:description" content="Contact Kauai South Africa. Find head office details, call client services, or find store locations nationwide.">
+    <meta property="og:image" content="images/about-hero.jpg">
+    <meta property="og:url" content="https://slyvester-kauai.netlify.app/contacts.html">
+    <meta property="og:type" content="website">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://slyvester-kauai.netlify.app/contacts.html">
+
+    <!-- Leaflet.js Maps CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
     <title>Contact Us | Kauai</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -80,31 +95,8 @@
                 <p>With over 170 locations nationwide, you'll find Kauai in all major metropolitan hubs including Cape Town, Johannesburg, Gqeberha, Durban, and Pretoria. Visit us at our standalone stores, retail hubs, or inside Virgin Active health clubs.</p>
             </div>
             
-            <ul>
-                <li>
-                    <h4>Cape Town - V&amp;A</h4>
-                    <p><small>V&amp;A Waterfront, Cape Town, 8001</small></p>
-                    <div class="map-wrapper">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3311.1182283063544!2d18.417246476140685!3d-33.90227912384661!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1dcc67623910b80f%3A0xc6822caca1c05d7b!2sVictoria%20%26%20Alfred%20Waterfront!5e0!3m2!1sen!2sza!4v1700000000000!5m2!1sen!2sza" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
-                </li>
-
-                <li>
-                    <h4>Johannesburg</h4>
-                    <p><small>Rosebank Mall, Johannesburg, 2196</small></p>
-                    <div class="map-wrapper">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3581.564177583796!2d28.0374163!3d-26.1457816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e950b73b5ee0ae1%3A0x6739b6fcfe974e64!2sRosebank%20Mall!5e0!3m2!1sen!2sza!4v1700000000001!5m2!1sen!2sza" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
-                </li>
-
-                <li>
-                    <h4>Gqeberha</h4>
-                    <p><small>Walmer Park Centre, Gqeberha, 6070</small></p>
-                    <div class="map-wrapper">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3307.728283307521!2d25.578648876143926!3d-33.999507926880024!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e6ad278a59892c9%3A0xc3b5edbbdffea0c9!2sWalmer%20Park%20Shopping%20Centre!5e0!3m2!1sen!2sza!4v1700000000002!5m2!1sen!2sza" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
-                </li>
-            </ul>
+            <!-- Interactive Leaflet Map Container -->
+            <div id="leaflet-map"></div>
         </section>
     </main>
 
@@ -126,6 +118,12 @@
         <hr>
         <p>&copy; 2026 Kauai South Africa. All Rights Reserved.</p>
     </footer>
+
+    <!-- Leaflet.js Map Library -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <!-- EmailJS SDK Library -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
     <!-- Lenis Smooth Scroll -->
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.45/dist/lenis.min.js"></script>
@@ -149,5 +147,7 @@
 
         requestAnimationFrame(raf);
     </script>
+    <!-- Custom interactivity & validation logic -->
+    <script src="js/main.js"></script>
 </body>
 </html>

@@ -3,7 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Explore our menu with a wide range of smoothies, wraps, salads, and warm bowls.">
+    <meta name="description" content="Explore our menu with a wide range of smoothies, wraps, salads, and warm bowls. Made with 100% natural, GMO-free ingredients.">
+    <meta name="keywords" content="Kauai menu, Peanut Butter Bomb, Princess Wrap, wheat-free, vegan bowls, health smoothies, fresh fruit juices, Cape Town menu, Rosebank menu">
+    
+    <!-- Open Graph SEO Meta Tags -->
+    <meta property="og:title" content="Our Menu | Kauai - Wholesome &amp; Fresh Food">
+    <meta property="og:description" content="Explore our menu with a wide range of smoothies, wraps, salads, and warm bowls. Made with 100% natural, GMO-free ingredients.">
+    <meta property="og:image" content="images/smoothie.jpg">
+    <meta property="og:url" content="https://slyvester-kauai.netlify.app/service.html">
+    <meta property="og:type" content="website">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://slyvester-kauai.netlify.app/service.html">
+
     <title>Menu | Kauai</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,101 +58,133 @@
             </nav>
         </section>
 
-        <!-- Smoothies Category Section -->
-        <section id="smoothies" class="menu-category">
-            <div class="category-header">
-                <h3>&#129380; Smoothies &amp; Raw Juices</h3>
-                <div class="category-img-wrapper">
-                    <img src="images/smoothie.jpg" alt="Green superfood smoothie" loading="lazy">
+            <!-- Interactive Search, Filtering, and Sorting Controls -->
+            <div class="menu-controls" style="margin-top: var(--s-6);">
+                <div class="menu-search-wrapper">
+                    <span class="menu-search-icon">&#128269;</span>
+                    <input type="text" id="menu-search" class="menu-search-input" placeholder="Search menu (e.g. peanut, chicken, wrap, avo)..." aria-label="Search menu items">
                 </div>
-            </div>
-            <div class="category-content">
-                <ul>
-                    <li>
-                        <h4>Peanut Butter Bomb <span class="badge" style="background: var(--c-accent); color: white; font-size: 0.75rem; padding: 0.15rem 0.4rem; border-radius: var(--radius-sm); margin-left: 0.5rem; font-family: var(--f-display); vertical-align: middle;">Fitness Cult-Classic</span></h4>
-                        <p>Whey protein, sugar-free peanut butter, banana, raw cacao, fat-free milk. South Africa's most loved post-workout protein blend.</p>
-                        <p><strong>R75</strong></p>
-                    </li>
-                    <li>
-                        <h4>Strawberry Stinger <span class="badge" style="background: var(--c-primary); color: white; font-size: 0.75rem; padding: 0.15rem 0.4rem; border-radius: var(--radius-sm); margin-left: 0.5rem; font-family: var(--f-display); vertical-align: middle;">All-Time Classic</span></h4>
-                        <p>Strawberries, banana, apple juice, frozen yoghurt. The legendary sweet-and-creamy smoothie that started the craze in 1996.</p>
-                        <p><strong>R68</strong></p>
-                    </li>
-                    <li>
-                        <h4>GEM (Green Energy Machine)</h4>
-                        <p>Spinach, apple, cucumber, celery, hemp seeds. Packed with active greens for full-body replenishment.</p>
-                        <p><strong>R65</strong></p>
-                    </li>
-                </ul>
+                
+                <div class="menu-filter-container">
+                    <button class="filter-pill active" data-category="all">All</button>
+                    <button class="filter-pill" data-category="smoothies">Smoothies</button>
+                    <button class="filter-pill" data-category="wraps">Wraps &amp; Salads</button>
+                    <button class="filter-pill" data-category="warm-bowls">Warm Bowls</button>
+                    <button class="filter-pill" data-category="breakfast">Breakfast</button>
+                </div>
+
+                <div class="menu-sort-container">
+                    <select id="menu-sort" class="menu-sort-select" aria-label="Sort menu items">
+                        <option value="default">Recommended</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="alphabetical">Alphabetical (A-Z)</option>
+                    </select>
+                </div>
             </div>
         </section>
 
-        <!-- Wraps & Salads Category Section -->
-        <section id="wraps" class="menu-category">
-            <div class="category-header">
-                <h3>&#129367; Wraps &amp; Salads</h3>
-                <div class="category-img-wrapper">
-                    <img src="images/wrap.jpg" alt="Fresh chicken and avocado wrap" loading="lazy">
-                </div>
-            </div>
-            <div class="category-content">
-                <ul>
-                    <li>
-                        <h4>Princess Wrap <span class="badge" style="background: var(--c-accent); color: white; font-size: 0.75rem; padding: 0.15rem 0.4rem; border-radius: var(--radius-sm); margin-left: 0.5rem; font-family: var(--f-display); vertical-align: middle;">Best Seller</span></h4>
-                        <p>Free-range chicken, fresh avocado, feta, tomatoes, carrot, celery &amp; onion mayo. Our iconic, most-ordered signature wrap since the beginning.</p>
-                        <p><strong>R89</strong></p>
-                    </li>
-                    <li>
-                        <h4>Harvest Salad</h4>
-                        <p>Roasted butternut, baby spinach, feta, cherry tomatoes, and a light vinaigrette. Rich in nutrients and flavor.</p>
-                        <p><strong>R79</strong></p>
-                    </li>
-                </ul>
-            </div>
-        </section>
+        <!-- Dynamic Menu Container loaded by JavaScript -->
+        <div id="dynamic-menu-container" style="margin-bottom: var(--s-10);">
+            <!-- Progressive Enhancement: Static HTML Fallback for No-JS/Crawlers -->
+            <noscript>
+                <!-- Smoothies Category Section -->
+                <section id="smoothies" class="menu-category">
+                    <div class="category-header">
+                        <h3>&#129380; Smoothies &amp; Raw Juices</h3>
+                        <div class="category-img-wrapper">
+                            <img src="images/smoothie.jpg" alt="Green superfood smoothie" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="category-content">
+                        <ul>
+                            <li>
+                                <h4>Peanut Butter Bomb <span class="badge badge-accent">Fitness Cult-Classic</span></h4>
+                                <p>Whey protein, sugar-free peanut butter, banana, raw cacao, fat-free milk. South Africa's most loved post-workout protein blend.</p>
+                                <p><strong>R75</strong></p>
+                            </li>
+                            <li>
+                                <h4>Strawberry Stinger <span class="badge badge-primary">All-Time Classic</span></h4>
+                                <p>Strawberries, banana, apple juice, frozen yoghurt. The legendary sweet-and-creamy smoothie that started the craze in 1996.</p>
+                                <p><strong>R68</strong></p>
+                            </li>
+                            <li>
+                                <h4>GEM (Green Energy Machine)</h4>
+                                <p>Spinach, apple, cucumber, celery, hemp seeds. Packed with active greens for full-body replenishment.</p>
+                                <p><strong>R65</strong></p>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
 
-        <!-- Warm Bowls Category Section -->
-        <section id="warm-bowls" class="menu-category">
-            <div class="category-header">
-                <h3>&#127858; Warm Bowls</h3>
-                <div class="category-img-wrapper">
-                    <img src="images/bowl.jpg" alt="Warm protein bowl" loading="lazy">
-                </div>
-            </div>
-            <div class="category-content">
-                <ul>
-                    <li>
-                        <h4>Mexi Bowl</h4>
-                        <p>Spicy chicken breast, brown rice, black beans, corn, warm salsa, and avocado.</p>
-                        <p><strong>R95</strong></p>
-                    </li>
-                    <li>
-                        <h4>Thai Crunch Bowl</h4>
-                        <p>Seared tofu, edamame, shredded cabbage, carrots, chili peanut dressing, and sesame seeds.</p>
-                        <p><strong>R85</strong></p>
-                    </li>
-                </ul>
-            </div>
-        </section>
-        
-        <!-- Breakfast Category Section -->
-        <section id="breakfast" class="menu-category">
-            <div class="category-header">
-                <h3>&#9749; Breakfast Specials</h3>
-                <div class="category-img-wrapper">
-                    <img src="images/breakfast.png" alt="Healthy breakfast spread with smashed avocado toast and fresh fruit" loading="lazy">
-                </div>
-            </div>
-            <div class="category-content">
-                <ul>
-                    <li>
-                        <h4>Smashed Avo Toast</h4>
-                        <p>Smashed avocado on sourdough with a squeeze of lemon and chili flakes.</p>
-                        <p><strong>R59</strong></p>
-                    </li>
-                </ul>
-            </div>
-        </section>
+                <!-- Wraps & Salads Category Section -->
+                <section id="wraps" class="menu-category">
+                    <div class="category-header">
+                        <h3>&#129367; Wraps &amp; Salads</h3>
+                        <div class="category-img-wrapper">
+                            <img src="images/wrap.jpg" alt="Fresh chicken and avocado wrap" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="category-content">
+                        <ul>
+                            <li>
+                                <h4>Princess Wrap <span class="badge badge-accent">Best Seller</span></h4>
+                                <p>Free-range chicken, fresh avocado, feta, tomatoes, carrot, celery &amp; onion mayo. Our iconic, most-ordered signature wrap since the beginning.</p>
+                                <p><strong>R89</strong></p>
+                            </li>
+                            <li>
+                                <h4>Harvest Salad</h4>
+                                <p>Roasted butternut, baby spinach, feta, cherry tomatoes, and a light vinaigrette. Rich in nutrients and flavor.</p>
+                                <p><strong>R79</strong></p>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Warm Bowls Category Section -->
+                <section id="warm-bowls" class="menu-category">
+                    <div class="category-header">
+                        <h3>&#127858; Warm Bowls</h3>
+                        <div class="category-img-wrapper">
+                            <img src="images/bowl.jpg" alt="Warm protein bowl" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="category-content">
+                        <ul>
+                            <li>
+                                <h4>Mexi Bowl</h4>
+                                <p>Spicy chicken breast, brown rice, black beans, corn, warm salsa, and avocado.</p>
+                                <p><strong>R95</strong></p>
+                            </li>
+                            <li>
+                                <h4>Thai Crunch Bowl</h4>
+                                <p>Seared tofu, edamame, shredded cabbage, carrots, chili peanut dressing, and sesame seeds.</p>
+                                <p><strong>R85</strong></p>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                
+                <!-- Breakfast Category Section -->
+                <section id="breakfast" class="menu-category">
+                    <div class="category-header">
+                        <h3>&#9749; Breakfast Specials</h3>
+                        <div class="category-img-wrapper">
+                            <img src="images/breakfast.png" alt="Healthy breakfast spread with smashed avocado toast and fresh fruit" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="category-content">
+                        <ul>
+                            <li>
+                                <h4>Smashed Avo Toast</h4>
+                                <p>Smashed avocado on sourdough with a squeeze of lemon and chili flakes.</p>
+                                <p><strong>R59</strong></p>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+            </noscript>
+        </div>
     </main>
 
     <footer>
@@ -185,5 +229,7 @@
 
         requestAnimationFrame(raf);
     </script>
+    <!-- Custom interactivity & validation logic -->
+    <script src="js/main.js"></script>
 </body>
 </html>

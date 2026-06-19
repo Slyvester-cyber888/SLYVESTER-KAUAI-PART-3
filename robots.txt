@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /private/
+
+Sitemap: https://slyvester-kauai.netlify.app/sitemap.xml
