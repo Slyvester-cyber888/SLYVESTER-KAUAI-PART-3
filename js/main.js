@@ -570,24 +570,21 @@ function initContactForm() {
         // -------------------------------------------------------------
         // EmailJS Integration
         // -------------------------------------------------------------
-        // IMPORTANT: Swap placeholders with actual dashboard credentials
-        const EMAILJS_SERVICE_ID = "service_abc123xyz"; // Example Service ID
-        const EMAILJS_TEMPLATE_ID = "template_def456uvw"; // Example Template ID
-        const EMAILJS_PUBLIC_KEY = "user_ghijkl789mno"; // Example Public Key
+        const EMAILJS_SERVICE_ID = "service_yl8cjej"; // User's Service ID
+        const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID"; // User will provide this once saved
+        const EMAILJS_PUBLIC_KEY = "mopgh7FbB89KyWt21"; // User's Public Key
 
         // Check if emailjs is loaded
         if (typeof emailjs !== "undefined") {
-            // Check if user set their own credentials
-            const isDefaultKey = EMAILJS_PUBLIC_KEY.startsWith("user_");
+            // Check if user set their template ID
+            const isPlaceholderTemplate = EMAILJS_TEMPLATE_ID === "YOUR_TEMPLATE_ID";
             
-            if (isDefaultKey) {
-                // If developer hasn't set their key, fallback to a local mock send with a warning
-                console.warn("EmailJS: Using placeholder API keys. Simulating AJAX submission...");
+            if (isPlaceholderTemplate) {
+                console.warn("EmailJS: Using placeholder Template ID. Simulating AJAX submission...");
                 setTimeout(() => {
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = originalText;
-                    
-                    showFormFeedback(form, "success", `Success! Message simulated. To enable live sending, replace the API keys in js/main.js!`);
+                    showFormFeedback(form, "success", `Simulation Success! Replace template ID inside js/main.js to make it live!`);
                     form.reset();
                 }, 1200);
             } else {
