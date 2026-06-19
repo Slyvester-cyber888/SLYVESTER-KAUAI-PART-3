@@ -762,7 +762,7 @@ main section {
 }
 
 .category-content li h4 {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   color: var(--c-primary-dark);
 }
 
@@ -857,53 +857,51 @@ main section {
 }
 
 /* ==========================================================================
-   Contact Grid layout
+   Contact Form + Map layout
    ========================================================================== */
-.contact-grid {
+.contact-layout {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--s-8);
 }
 
-@media (min-width: 850px) {
-  .contact-grid {
-    grid-template-columns: 1fr 1.5fr;
+@media (min-width: 900px) {
+  .contact-layout {
+    grid-template-columns: 1.15fr 1fr;
     gap: var(--s-10);
   }
 }
 
-.info-card {
+.contact-form-card,
+.contact-map-card {
   background: var(--c-bg-card);
   border: 1px solid var(--c-border);
   border-radius: var(--radius-lg);
   padding: var(--s-6);
   box-shadow: var(--shadow-sm);
+}
+
+.contact-map-card {
   display: flex;
   flex-direction: column;
   gap: var(--s-4);
 }
 
-.info-card h3 {
+.contact-map-card h3 {
   font-size: 1.3rem;
-  margin-bottom: var(--s-2);
+  margin-bottom: var(--s-1);
 }
 
-.info-card ul {
-  display: flex;
-  flex-direction: column;
-  gap: var(--s-4);
-  list-style: none;
+.contact-map-card p {
+  font-size: 0.9375rem;
 }
 
-.info-card li {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-size: 1rem;
+.contact-map {
+  height: 320px;
 }
 
-.info-card .emoji {
-  font-size: 1.3rem;
+#contact-content-section .form-actions {
+  justify-content: flex-start;
 }
 
 /* ==========================================================================

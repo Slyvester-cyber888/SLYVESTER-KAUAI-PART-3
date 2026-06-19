@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Kauai to find out more or reach our head office.">
+    <title>Contact Us | Kauai</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <a href='index.html' class="logo">
+            <h1>&#127811; Kauai</h1>
+        </a>
+        
+        <nav>
+            <a href='index.html' class="nav-link">Home</a>
+            <a href='about.html' class="nav-link">About Us</a>
+            <a href='service.html' class="nav-link">Menu</a>
+            <a href='inquiry.html' class="nav-link">Enquiry</a>
+            <a href='contacts.html' class="nav-link active">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="contact-intro">
+            <h2>Get in Touch</h2>
+            <div class="hero-bg">
+                <img src="images/about-hero.jpg" alt="Kauai vibrant atmosphere" loading="lazy">
+            </div>
+            <p>We'd love to hear from you. Find our head office details and our prominent national locations below.</p>
+        </section>
+
+        <section id="contact-content-section">
+            <div class="section-header">
+                <h2>Contact &amp; Location</h2>
+                <p>Send us your details and message, then use the map to find our head office.</p>
+            </div>
+
+            <div class="contact-layout">
+                <div class="contact-form-card">
+                    <form action="#" method="POST" class="premium-form">
+                        <fieldset>
+                            <legend>Contact Form</legend>
+
+                            <div class="form-group">
+                                <label for="contactName">Name</label>
+                                <input type="text" id="contactName" name="contactName" placeholder="Your full name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contactEmail">Email</label>
+                                <input type="email" id="contactEmail" name="contactEmail" placeholder="your@email.com" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contactSubject">Subject</label>
+                                <select id="contactSubject" name="contactSubject" required>
+                                    <option value="" disabled selected>Select a subject</option>
+                                    <option value="general">General Enquiry</option>
+                                    <option value="reservation">Reservation</option>
+                                    <option value="franchise">Franchise Information</option>
+                                    <option value="feedback">Customer Feedback</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contactMessage">Message</label>
+                                <textarea id="contactMessage" name="contactMessage" placeholder="Type your message here..." required></textarea>
+                            </div>
+                        </fieldset>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn-cta">Submit <span class="arrow">&rarr;</span></button>
+                        </div>
+                    </form>
+                </div>
+
+                <aside class="contact-map-card">
+                    <h3>&#128205; Visit Our Head Office</h3>
+                    <p>123 Health Ave, Century City, Cape Town, 7441</p>
+
+                    <div class="map-wrapper contact-map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3311.1182283063544!2d18.417246476140685!3d-33.90227912384661!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1dcc67623910b80f%3A0xc6822caca1c05d7b!2sVictoria%20%26%20Alfred%20Waterfront!5e0!3m2!1sen!2sza!4v1700000000000!5m2!1sen!2sza" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </aside>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <h2>&#127811; Kauai</h2>
+        <p>Real, wholesome food that fuels an active and balanced lifestyle.</p>
+
+        <nav>
+            <a href='about.html'>Our Story</a>
+            <a href='service.html'>Our Menu</a>
+            <a href='inquiry.html'>Franchise &amp; Enquiry</a>
+            <a href='contacts.html'>Store Locator</a>
+        </nav>
+
+        <h4>Connect</h4>
+        <p>Email: customercare@kauai.co.za</p>
+        <p>Phone: 0861 152 824</p>
+        
+        <hr>
+        <p>&copy; 2026 Kauai South Africa. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Lenis Smooth Scroll -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.45/dist/lenis.min.js"></script>
+    <script>
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
+            infinite: false,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+
+        requestAnimationFrame(raf);
+    </script>
+</body>
+</html>
