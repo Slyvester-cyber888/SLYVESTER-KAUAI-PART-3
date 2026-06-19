@@ -9,7 +9,7 @@
 - **Lecturer:** Mzimasi Mbongwe
 - **Date:** June 2026
 - **GitHub Repository:** [https://github.com/Slyvester-cyber888/SLYVESTER-KAUAI-PART-3](https://github.com/Slyvester-cyber888/SLYVESTER-KAUAI-PART-3)
-- **Live Website Deployment:** [https://slyvester-kauai-part3.netlify.app/](https://slyvester-kauai-part-3.netlify.app/) *(Alternative placeholder URL)*
+- **Live Website Deployment:** [https://slyvester-kauai-part3.netlify.app/](kauaiza.netlify.app) *(Alternative placeholder URL)*
 
 ---
 
